@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <section id="header">
+        <div id="logo">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.B4Z-NSk48VLIGdXai5FSVAHaEo&pid=Api&P=0&h=180" alt="logo">
+        </div>
+        <div class="quote"><b>"A  reader  lives  a  thausand  lives  before  he  dies." </b></div>
+        <div class="c"><a href="./signup.html"><button>Sign-up</button></a></div>
+    </section>
+    <section id="login">
+        <div class="login">
+            <h1>Hellow</h1>
+            <h2>Welcome! to</h2>
+            <h2>Library Management</h2>
+        </div>
+        <form onsubmit="return validateForm()" action="./dashboard.html" class="loginpage">
+            <div class="ram">
+                <input type="number" id="phone" placeholder="Your Phone" value="" required>
+            </div>
+            <div class="ram">
+                <input type="email" id="email" placeholder="Your E-Mail" value="" required>
+            </div>
+            <div class="ram">
+                <input type="password" id="password" name="password" id="password" placeholder="Enter password" required>
+            </div>
+            <div class="ram">
+                <input type="checkbox" required> <b>I'm Not a robot.</b>
+            </div>
+            <div class="ram">
+                <div class="ramm">
+                    <button>Log-in</button>
+                    <a href="./signup.html"><button>Sign-up</button></a>
+                </div>
+            </div>
+        </form>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="./index.js"></script>
+</body>
+</html>

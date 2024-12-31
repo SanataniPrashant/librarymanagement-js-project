@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+    /* overflow-y: hidden; */
+}
+
+#header{
+    height: 101px;
+    background-color: black;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    align-items: center;
+    color: white;
+    border: 2px solid wheat;
+    border-bottom: 4px solid wheat ;
+}
+#box{
+
+    margin-top: 0px;
+    position: fixed;
+    z-index: 10;
+    width: 250px;
+    height: 86vh;
+    border-right: 3px solid black;
+    border-bottom: 3px solid black;
+    background-color:transparent;
+    display: none;
+}
+#input1:checked ~ #box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+#box button{
+    padding: 20px 40px;
+    background-color: #080808;
+    border: 2px solid white;
+    border-radius: 5px;
+    color: white;
+    height: 70px;
+    width: 200px;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; 
+    cursor: pointer; 
+}
+#box button:hover{
+    background-color: white;
+    color: #080808;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+#topic{
+    font-size: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    align-items: center;
+    gap: 40px;
+}
+#topic a{
+    color: white;
+    text-decoration: none;
+}
+#logo img{
+    width: 90px;
+    height: 90px;
+    border: 2px solid white;
+    border-radius:50%;
+}
+#admin{
+    height: 86vh;
+    background-color:transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 255px;
+
+}
+#admin div{
+    margin-left: 20px;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 60px;
+    color: rgb(0, 0, 0);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 24px;
+}
+#admin img{
+    width: 200px;
+    height: 200px;
+    border: 2px solid rgb(246, 241, 241);
+    border-radius: 50%;
+}
+#admin img:hover{
+    border: 2px solid #080808;
+    transform: scale(1.1);
+    transition: 2s;
+}
+#bookissue{
+    height: 86vh;
+    background-color:rgb(246, 241, 241);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 260px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+#bookissue table{
+    border-collapse: collapse;
+    width: 100%;
+    height: 99%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+#bookissue table thead{
+    background-color: #080808;
+    color: white;
+    border: 2px solid wheat;
+}
+#bookissue table thead th button{
+    background-color: #080808;
+    color: white;
+    border: 2px solid wheat;
+    margin: 2px;
+}
+#bookissue table tbody td{
+    border: 2px solid wheat;
+}
+#bookissue table tbody tr td{
+    text-align: center;
+}
+/* #addform{
+    position: absolute;
+    top: 200px;
+    left: 200px;
+    background-color: coral;
+    padding: 20px;
+    height: 500px;
+    width: 500px;
+    display: none;
+ }
+
+ #upform{
+    position: absolute;
+    top: 200px;
+    left: 400px;
+    background-color: coral;
+    padding: 20px;
+    height: 500px;
+    width: 500px;
+
+    display: none;
+} */
+
+#addform, #upform, #uppform {
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background-color: #f9f9f9;
+    padding: 30px; 
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+    display: none; 
+    width: 400px; 
+}
+
+#addform input, #upform input, #uppform input {
+    width: 100%; 
+    padding: 10px; 
+    margin: 10px 0; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    font-size: 16px; 
+}
+
+#addform button, #upform button, #uppform button {
+    background-color: #007bff; 
+    color: white; 
+    border: none;
+    padding: 10px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    transition: background-color 0.3s ease; 
+}
+
+#addform button:hover, #upform button:hover, #uppform button:hover {
+    background-color: #0056b3; 
+}
+
+#book{
+    height: 86vh;
+    background-color:rgb(246, 241, 241);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 260px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+#book table{
+    border-collapse: collapse;
+    width: 100%;
+    height: 99%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+#book table thead{
+    background-color: #080808;
+    color: white;
+    border: 2px solid wheat;
+}
+#book table thead th button{
+    background-color: #080808;
+    color: white;
+    border: 2px solid wheat;
+    margin: 2px;
+}
+#book table tbody td{
+    border: 2px solid wheat;
+}
+#book table tbody tr td{
+    text-align: center;
+}
+
+#AvailableBook{
+    height: 86vh;
+    background-color:rgb(246, 241, 241);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 260px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+#AvailableBook table{
+    border-collapse: collapse;
+    width: 100%;
+    height: 99%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+#AvailableBook table thead{
+    background-color: #080808;
+    color: white;
+    border: 2px solid wheat;
+}
+#AvailableBook table thead th button{
+    background-color: #080808;
+    color: white;
+    border: 2px solid wheat;
+    margin: 2px;
+}
+#AvailableBook table tbody td{
+    border: 2px solid wheat;
+}
+#AvailableBook table tbody tr td{
+    text-align: center;
+}
+
+
+#UpcomingBook{
+    height: 86vh;
+    background-color:rgb(246, 241, 241);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 260px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+#UpcomingBook table{
+    border-collapse: collapse;
+    width: 100%;
+    height: 99%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+#UpcomingBook table thead{
+    background-color: #080808;
+    color: white;
+    border: 2px solid wheat;
+}
+#UpcomingBook table thead th button{
+    background-color: #080808;
+    color: white;
+    border: 2px solid wheat;
+    margin: 2px;
+}
+#UpcomingBook table tbody td{
+   border: 2px solid wheat;
+}
+#UpcomingBook table tbody tr td{
+    text-align: center;
+}
+
+@media(max-width:768px){
+
+    #box{
+    width:100%;
+    height: 100px;
+    position:sticky;
+    }
+    #box button{
+    padding: 15px 20px;
+    }
+
+    #input1:checked ~ #box{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    }
+
+    #admin{
+    height: 70vh;
+    margin-left: 0px;
+    margin-top: 80px;
+    }
+    #admin div{
+    margin-left: 0px;
+    display: grid;
+    grid-template-columns: auto;
+    gap: 10px;
+    /* align-items: center; */
+    margin-left: 50px;
+    font-size: 20px;
+    }
+    #admin img{
+    margin-left: 200px;
+    }
+    #bookissue{
+    margin-left: 10px;
+    }
+    #book{
+    margin-left: 10px;
+    }
+    #UpcomingBook{
+        margin-left: 10px; 
+    }
+    #AvailableBook{
+        margin-left: 10px;
+    }
+}
+
+@media(max-width:426px){
+    #header{
+        height: 80px;
+    }
+    #logo img{
+    width: 60px;
+    height: 60px;
+}
+    #topic{
+        display: none;
+    }
+    #box{
+    width:100%;
+    height: 100%;
+    border: 2px solid rgb(243, 23, 23);
+    }
+    #box button{
+    padding: 5px 10px;
+    height: 40px;
+    width: 100px;
+    }
+    #input1:checked ~ #box{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    }
+
+    #admin{
+    height: 70vh;
+    margin-left: 0px;
+    margin-top: 80px;
+    }
+    #admin div{
+    display: grid;
+    grid-template-columns: auto;
+    gap: 10px;
+    /* align-items: center; */
+    margin-left: 20px;
+    font-size: 20px;
+    }
+    #admin img{
+    margin-left: 100px;
+    }
+    #bookissue{
+    overflow-x: hidden;
+    margin-left: 0px;
+    margin-right: 0px;
+    }
+    #book{
+    margin-left: 10px;
+    }
+    #UpcomingBook{
+        margin-left: 10px; 
+    }
+    #AvailableBook{
+        margin-left: 10px;
+    }
+}
+    </style>
+</head>
+<body>
+    <input type="checkbox" hidden id="input1"/>
+    <section id="header">
+        <label for="input1"><i id="bars" class="fa fa-bars fa-3x"></i></label>
+        <div id="topic">
+            <b>"A  reader  lives  a  thausand  lives  before  he  dies." </b>
+        </div>
+        <div id="logo">
+            <img src="https://tse2.mm.bing.net/th?id=OIP.B4Z-NSk48VLIGdXai5FSVAHaEo&pid=Api&P=0&h=180" alt="logo">
+        </div>
+    </section>
+    <section id="box">
+        <button  onclick="admin()">Admin Information</button>
+        <button onclick="bookissue()">Book Issue</button>
+        <button class="add" onclick="add()">Add New</button>
+        <button onclick="book()">BookWorld</button>
+        <button onclick="AvailableBook()">Available Books</button>
+        <button onclick="UpcomingBook()">Upcoming Books</button>
+        
+    </section>
+    
+    <div id="admin" style="display: none;">
+        <img src="https://images.pexels.com/photos/4427630/pexels-photo-4427630.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="image"> <br>
+        <div>
+            <div><span><b>Name :</b></span> <span>Prashant Pandey</span></div>
+            <div><span><b>D.O.B :</b></span> <span>03-07-2004</span></div>
+            <div> <span><b>Contact :</b></span> <span>9752617634</span></div>
+            <div><span><b>E-Mail :</b></span> <span>prashantpandey76867@gmail.com</span></div>
+            <div><span><b>Address :</b></span> <span>Awadhpuri Bhopal</span></div>
+            <div><span><b>Father Name :</b></span> <span>Jayprakash Pandey</span></div>
+            <div><span><b>Mother Name :</b></span> <span>Usha Pandey</span></div>
+        </div>
+    </div>
+    <div id="bookissue" style="display: none;">
+        <table border="2px solid black">
+            <thead>
+                <th>S.NO.</th>
+                <th>NAME OF CUSTOMER</th>
+                <th>ISSUE DATE</th>
+                <th>RETURN DATE</th>
+                <th>BOOK NAME</th>
+                <th>CONTACT</th>
+                <th>ADDRESS</th>
+                <th>DELETE</th>
+                <th>EDIT DATA</th>
+
+            </thead>
+            <tbody id="showdata">
+    
+            </tbody>
+        </table>
+    </div>
+
+    
+<form id="addform">
+    <input type="text" placeholder="Enter Sno" id="Sno2" > <br>
+    <input type="text" placeholder="Enter Name" id="Name2" > <br>
+    <input type="text" placeholder="Enter IssueDate" id="IssueDate2" > <br>
+    <input type="text" placeholder="Enter ReturnDate" id="ReturnDate2" > <br>
+    <input type="text" placeholder="Enter BookName" id="BookName2" > <br>
+    <input type="text" placeholder="Enter Contact" id="Contact2" > <br>
+    <input type="text" placeholder="Enter Address" id="Address2" > <br>
+    <button onclick="return addinfo()">save data</button>
+</form>
+
+<form id="upform">
+    <input type="text" placeholder="Enter Sno" id="Sno3" > <br>
+    <input type="text" placeholder="Enter Name" id="Name3" > <br>
+    <input type="text" placeholder="Enter IssueDate" id="IssueDate3" > <br>
+    <input type="text" placeholder="Enter ReturnDate" id="ReturnDate3" > <br>
+    <input type="text" placeholder="Enter BookName" id="BookName3" > <br>
+    <input type="text" placeholder="Enter Contact" id="Contact3" > <br>
+    <input type="text" placeholder="Enter Address" id="Address3" > <br>
+    <button onclick="finalupdate()">save data</button>
+</form>
+
+<form id="uppform">
+    <input type="text" placeholder="Enter Sno" id="Sno4" > <br>
+    <input type="text" placeholder="Enter BookId" id="BookId4" > <br>
+    <input type="text" placeholder="Enter BookName" id="BookName4" > <br>
+    <input type="text" placeholder="Enter AuthorName" id="AuthorName4" > <br>
+    <button onclick="finaluppdate()">save data</button>
+</form>
+
+<div id="book" style="display: none;">
+    <table border="2px solid black">
+        <thead>
+            <th>Sno</th>
+            <th>BOOK ID</th>
+            <th>BOOK NAME</th>
+            <th>AUTHOR NAME</th>
+            <th>DELETE</th>
+            <th>EDIT DATA</th>
+        </thead>
+        <tbody id="showdata1">
+
+        </tbody>
+
+    </table>
+</div>
+
+<div id="AvailableBook" style="display: none;">
+    <table border="2px solid black">
+        <thead>
+            <th>Sno</th>
+            <th>BOOK ID</th>
+            <th>BOOK NAME</th>
+            <th>AUTHOR NAME</th>
+            <th>DELETE</th>
+            <th>EDIT DATA</th>
+        </thead>
+        <tbody id="showdata2">
+
+        </tbody>
+
+    </table>
+</div>
+
+<div id="UpcomingBook" style="display: none;">
+    <table border="2px solid black">
+        <thead>
+            <th>Sno</th>
+            <th>BOOK ID</th>
+            <th>BOOK NAME</th>
+            <th>AUTHOR NAME</th>
+            <th>DELETE</th>
+            <th>EDIT DATA</th>
+        </thead>
+        <tbody id="showdata3">
+
+        </tbody>
+
+    </table>
+</div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script>
+        function admin(){
+        var adminSection = document.getElementById("admin");
+        var bookissue = document.getElementById("bookissue");
+        var AvailableBook = document.getElementById("AvailableBook");
+        var book = document.getElementById("book");
+
+        if (adminSection.style.display === "block") {
+            adminSection.style.display = "none"; // Hide if already shown
+        } 
+        else {
+            adminSection.style.display = "block"; // Show if hidden
+            bookissue.style.display = "none";
+            book.style.display = "none";
+            AvailableBook.style.display = "none";
+        }
+        }
+        function bookissue(){
+        var bookissue = document.getElementById("bookissue");
+        var adminSection = document.getElementById("admin");
+        var AvailableBook = document.getElementById("AvailableBook");
+        var UpcomingBook = document.getElementById("UpcomingBook");
+        var book = document.getElementById("book");
+        if (bookissue.style.display === "block") {
+            bookissue.style.display = "none"; // Hide if already shown
+        } 
+        else {
+            bookissue.style.display = "block"; // Show if hidden
+            adminSection.style.display = "none";
+            book.style.display = "none";
+            AvailableBook.style.display = "none";
+            UpcomingBook.style.display = "none";
+        }
+        }
+        function book(){
+            var book = document.getElementById("book");
+            var bookissue = document.getElementById("bookissue");
+            var adminSection = document.getElementById("admin");
+            var AvailableBook = document.getElementById("AvailableBook");
+            var UpcomingBook = document.getElementById("UpcomingBook");
+
+            if (book.style.display === "block") {
+                book.style.display = "none"; // Hide if already shown
+            } 
+        else {
+            book.style.display = "block"; // Show if hidden
+            adminSection.style.display = "none";
+            bookissue.style.display = "none";
+            AvailableBook.style.display = "none";
+            UpcomingBook.style.display = "none";
+
+        }
+        }
+        function AvailableBook(){
+            var book = document.getElementById("book");
+            var bookissue = document.getElementById("bookissue");
+            var adminSection = document.getElementById("admin");
+            var AvailableBook = document.getElementById("AvailableBook");
+            var UpcomingBook = document.getElementById("UpcomingBook");
+
+            if (AvailableBook.style.display === "block") {
+                AvailableBook.style.display = "none"; // Hide if already shown
+        } 
+        else {
+            AvailableBook.style.display = "block"; // Show if hidden
+            adminSection.style.display = "none";
+            bookissue.style.display = "none";
+            book.style.display = "none";
+            UpcomingBook.style.display = "none";
+
+            
+        }
+        }
+
+        function UpcomingBook(){
+            var book = document.getElementById("book");
+            var bookissue = document.getElementById("bookissue");
+            var adminSection = document.getElementById("admin");
+            var AvailableBook = document.getElementById("AvailableBook");
+            var UpcomingBook = document.getElementById("UpcomingBook");
+
+
+            if (UpcomingBook.style.display === "block") {
+                UpcomingBook.style.display = "none"; // Hide if already shown
+        } 
+        else {
+            UpcomingBook.style.display = "block"; // Show if hidden
+            adminSection.style.display = "none";
+            bookissue.style.display = "none";
+            book.style.display = "none";
+            AvailableBook.style.display = "none";
+        }
+        }
+
+        async function fet_data(){
+        let res = await fetch("http://localhost:3000/library")
+        let data = await res.json()
+        let final_data = data.map((e)=>`
+        <tr>
+            <td> ${e.Sno} </td>   
+            <td> ${e.Name} </td>   
+            <td> ${e.IssueDate} </td>   
+            <td> ${e.ReturnDate} </td>   
+            <td> ${e.BookName} </td>   
+            <td> ${e.Contact} </td>   
+            <td> ${e.Address} </td>
+            <td> <button onclick = "mydelete('${e.id}')">Delete</button> </td>   
+            <td> <button onclick = "updateform('${e.id}')">EDIT</button> </td>  
+        </tr>
+        `).join("")
+        document.querySelector("#showdata").innerHTML = final_data;
+        }
+    fet_data();
+
+    function mydelete(id){
+    let res = window.confirm("do you really want to delete information")
+    if(res){
+        fetch(`http://localhost:3000/library/${id}`,{
+            method: 'DELETE',
+            // headers:{
+            // 'content-type':'application/json'
+            // },
+        })
+        .then(re=>alert("deleted successfully"))
+        
+    }else{
+        alert("invalid click")
+    }}
+
+    function add(){
+        let addform=document.querySelector("#addform");
+        addform.style.display="block";
+    }
+
+function addinfo(){
+let Sno = document.querySelector("#Sno2").value;
+let Name = document.querySelector("#Name2").value;
+let IssueDate = document.querySelector("#IssueDate2").value;
+let ReturnDate = document.querySelector("#ReturnDate2").value;
+let BookName = document.querySelector("#BookName2").value;
+let Contact = document.querySelector("#Contact2").value;
+let Address = document.querySelector("#Address2").value
+let obj = {
+  "Sno": Sno,
+  "Name": Name,
+  "IssueDate": IssueDate,
+  "ReturnDate": ReturnDate,
+  "BookName": BookName,
+  "Contact": Contact,
+  "Address": Address
+}
+
+console.log(obj);
+fetch(`http://localhost:3000/library/`,{
+    method:"POST",
+    body:JSON.stringify(obj)
+})
+.then((res)=>alert("send successfully"))
+return false;
+}
+
+let uid =null;
+    async function updateform(id){
+    let data = await fetch(`http://localhost:3000/library/${id}`);
+    let res = await data.json();
+    uid = id;
+    let selectform = document.querySelector('#upform');
+    selectform.style.display = "block";
+
+    document.querySelector('#Sno3').value = res.Sno;
+    document.querySelector('#Name3').value = res.Name;
+    document.querySelector('#IssueDate3').value = res.IssueDate;
+    document.querySelector('#ReturnDate3').value = res.ReturnDate;
+    document.querySelector('#BookName3').value = res.BookName;
+    document.querySelector('#Contact3').value = res.Contact;
+    document.querySelector('#Address3').value = res.Address
+}
+
+function finalupdate(){
+    let Sno = document.querySelector('#Sno3').value;
+    let Name = document.querySelector('#Name3').value;
+    let IssueDate = document.querySelector('#IssueDate3').value;
+    let ReturnDate = document.querySelector('#ReturnDate3').value;
+    let BookName = document.querySelector('#BookName3').value;
+    let Contact = document.querySelector('#Contact3').value;
+    let Address = document.querySelector('#Address3').value 
+    
+    let obj = {
+        "Sno":Sno,
+        "Name":Name,
+        "IssueDate" :IssueDate,
+        "ReturnDate" : ReturnDate,
+        "BookName" : BookName,
+        "Contact" : Contact,
+        "Address" : Address
+    }
+
+    console.log(obj)
+    fetch(`http://localhost:3000/library/${uid}`,{
+        method:"PUT",
+        body:JSON.stringify(obj)
+    })
+
+}
+
+
+
+async function fett_data(){
+        let res = await fetch("http://localhost:3000/Available")
+        let data = await res.json()
+        console.log(data);
+        let final_data = data.map((e)=>`
+        <tr>
+            <td> ${e.Sno} </td>
+            <td> ${e.BookId} </td>   
+            <td> ${e.BookName} </td>   
+            <td> ${e.AuthorName} </td>
+            <td> <button onclick = "myydelete('${e.id}')">Delete</button> </td>   
+            <td> <button onclick = "updateeform('${e.id}')">EDIT</button> </td>  
+        </tr>
+        `).join("")
+        document.querySelector("#showdata1").innerHTML = final_data;
+        document.querySelector("#showdata2").innerHTML = final_data;
+        document.querySelector("#showdata3").innerHTML = final_data;
+        }
+    fett_data();
+
+    function myydelete(id){
+    let res = window.confirm("do you really want to delete information")
+    if(res){
+        fetch(`http://localhost:3000/Available/${id}`,{
+            method: 'DELETE',
+            // headers:{
+            // 'content-type':'application/json'
+            // },
+        })
+        .then(re=>alert("deleted successfully"))
+        
+    }else{
+        alert("invalid click")
+    }}
+
+
+let uiid =null;
+async function updateeform(id){
+    let data = await fetch(`http://localhost:3000/Available/${id}`);
+    let res = await data.json();
+    uiid = id;
+    let selecttform = document.querySelector('#uppform');
+    selecttform.style.display = "block";
+
+    document.querySelector('#Sno4').value = res.Sno;
+    document.querySelector('#BookId4').value = res.BookId;
+    document.querySelector('#BookName4').value = res.BookName,
+    document.querySelector('#AuthorName4').value = res.AuthorName
+}
+
+function finaluppdate(){
+    let Sn = document.querySelector('#Sno4').value;
+    let Id = document.querySelector('#BookId4').value;
+    let BookName = document.querySelector('#BookName4').value;
+    let AuthorName = document.querySelector('#AuthorName4').value
+    
+    let obj = {
+        "Sno":Sn,
+        "BookId":Id,
+        "BookName":BookName,
+        "AuthorName":AuthorName
+    }
+
+    console.log(obj)
+    fetch(`http://localhost:3000/Available/${uiid}`,{
+        method:"PUT",
+        body:JSON.stringify(obj)
+    })
+}
+
+    </script>
+</body>
+</html>
